@@ -1,1 +1,1 @@
-# Bank-Loan-Analysis
+This is a bank loan analysis. This addresses an individual/joint income generation on an annual basis, if they own a home and if it is being mortgaged, if the individual has access to loans, the amount they've collected over a specific period and how long they intend to repay the loan for. This project address if the individual have access to good loans and bad loans, it also talks about the interest accrued overtime. This project answers some pertinent questions and it also provides some visualization for the answered questions.
