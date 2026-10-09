@@ -30,12 +30,12 @@ total_loan_app = bank_loan['id'].count()
 print(f'The total number of loan applications: ', total_loan_app)
 
 # Displays the last time a loan was issued
-latest_issue_date = bank_loan['issue_date'].max
-latest_year = latest_issue_date.year()
-latest_month = latest_issue_date.month()
-date_data = bank_loan[(bank_loan['issue_date'].dt.year() == latest_year) & (bank_loan['issue_date'].dt.month() == latest_month)]
-loan_application = date_data['id'].count()
-print(f"The last date a loan was issued(for (latest_issue_date.strftime('%0 &Y))):loan_application)")
+bank_loan['issue_date'] = pd.to_datetime(bank_loan['issue_date'])
+latest_issue_date = bank_loan['issue_date'].max()
+latest_month_loans = bank_loan[
+    (bank_loan['issue_date'].dt.year == latest_issue_date.year)
+    & (bank_loan['issue_date'].dt.month == latest_issue_date.month)]
+print(f"Loans issued in {latest_issue_date.strftime('%B %Y')}: {latest_month_loans['id'].count()}")
 
 # Displays the total amount funded
 total_funded = bank_loan['loan_amount'].sum()
@@ -85,6 +85,10 @@ print(f"Bad Loan Funded Amount: ${bad_loan_funded}M")
 print(f"Total Bad Loan Received: ${bad_loan_received_millions:.2f}M")
 print(f"Bad Loan Percentage: {bad_loan_percent:.2f}%")
 
+print(f"Total Amount Received: ${total_received_millions:.2f}M")
+print(f"Good Loan Funded Amount: ${good_loan_million:.2f}M")
+print(f"Bad Loan Funded Amount: ${bad_loan_million:.2f}M")
+
 # Displays the visual Analysis based on States
 states = bank_loan.groupby('address_state')['loan_amount'].sum().sort_values(ascending=True)
 state_funding = states / 1000
@@ -95,7 +99,7 @@ bars = plt.barh(state_funding.index,state_funding.values, color= 'Blue')
 for bar in bars:
     width = bar.get_width()
     plt.text(width + 9, bar.get_height() / 2,
-             f'{width:,.0f}K', va = 'center', fontsize = 6)
+             f'{width:,.0f}M', va = 'center', fontsize = 6)
 
 plt.title('Total Amount Funded By State')
 plt.xlabel('Funded Amount')
@@ -127,7 +131,7 @@ bars = plt.barh(employee_funding.index,employee_funding, color= 'Green')
 for bar in bars:
     width = bar.get_width()
     plt.text(width + 5, bar.get_height() / 2,
-             f'{width:,.0f}K', va = 'center', fontsize = 8)
+             f'{width:,.0f}M', va = 'center', fontsize = 8)
 
 plt.title('Amount Funded')
 plt.xlabel('Total Funded Amount By Employee Lenght')
