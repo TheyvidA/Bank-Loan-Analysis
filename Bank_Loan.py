@@ -31,10 +31,10 @@ print(f'The total number of loan applications: ', total_loan_app)
 
 # Displays the last time a loan was issued
 latest_issue_date = bank_loan['issue_date'].max
-#latest_year = latest_issue_date.year()
-#latest_month = latest_issue_date.month()
-#date_data = bank_loan[(bank_loan['issue_date'].dt.year() == latest_year) & (bank_loan['issue_date'].dt.month() == latest_month)]
-#loan_application = date_data['id'].count()
+latest_year = latest_issue_date.year()
+latest_month = latest_issue_date.month()
+date_data = bank_loan[(bank_loan['issue_date'].dt.year() == latest_year) & (bank_loan['issue_date'].dt.month() == latest_month)]
+loan_application = date_data['id'].count()
 print(f"The last date a loan was issued(for (latest_issue_date.strftime('%0 &Y))):loan_application)")
 
 # Displays the total amount funded
