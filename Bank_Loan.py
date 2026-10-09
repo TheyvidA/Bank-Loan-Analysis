@@ -45,7 +45,6 @@ print(f"Total Amount Funded: ${total_funded_millions:.2f}M")
 #Displays the total amount received
 total_received = bank_loan['total_payment'].sum()
 total_received_millions = total_received / 1000000
-print(f"Total Amount Funded: ${total_received_millions:.2f}M")
 
 # Displays the average interest
 Avg_interest = bank_loan['int_rate'].mean()
@@ -66,7 +65,6 @@ good_loan_received_millions = good_loan_received / 1000000
 good_loan_percent = (good_loans_app / total_loan_app) * 100
 
 print(f"Good Loan Applications: ", good_loans_app)
-print(f"Good Loan Funded Amount: ${good_loan_funded}M")
 print(f"Total Good Loan Received: ${good_loan_received_millions}M")
 print(f"Good Loan Percentage: {good_loan_percent:.2f}%")
 
@@ -81,7 +79,6 @@ bad_loan_received_millions = bad_loan_received / 1000000
 bad_loan_percent = (bad_loans_app / total_loan_app) * 100
 
 print(f"Bad Loan Applications: ", bad_loans_app)
-print(f"Bad Loan Funded Amount: ${bad_loan_funded}M")
 print(f"Total Bad Loan Received: ${bad_loan_received_millions:.2f}M")
 print(f"Bad Loan Percentage: {bad_loan_percent:.2f}%")
 
@@ -99,7 +96,7 @@ bars = plt.barh(state_funding.index,state_funding.values, color= 'Blue')
 for bar in bars:
     width = bar.get_width()
     plt.text(width + 9, bar.get_height() / 2,
-             f'{width:,.0f}M', va = 'center', fontsize = 6)
+             f'{width:,.0f}K', va = 'center', fontsize = 6)
 
 plt.title('Total Amount Funded By State')
 plt.xlabel('Funded Amount')
@@ -114,7 +111,7 @@ plt.figure(figsize=(5,5))
 plt.pie(
     term_funding,
     labels = term_funding.index,
-    autopct = lambda d: f"{d:.1f}%\n${d*sum(term_funding) / 100:.1f}M",
+    autopct = lambda d: f"{d:.1f}%\n${d*sum(term_funding) / 100:.1f}K",
     startangle = 90,
     wedgeprops = {'width': 0.4}
 )
@@ -131,7 +128,7 @@ bars = plt.barh(employee_funding.index,employee_funding, color= 'Green')
 for bar in bars:
     width = bar.get_width()
     plt.text(width + 5, bar.get_height() / 2,
-             f'{width:,.0f}M', va = 'center', fontsize = 8)
+             f'{width:,.0f}K', va = 'center', fontsize = 8)
 
 plt.title('Amount Funded')
 plt.xlabel('Total Funded Amount By Employee Lenght')
